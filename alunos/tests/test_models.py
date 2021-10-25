@@ -3,8 +3,10 @@ from model_mommy import mommy
 
 
 class EnderecoAlunoTestCase(TestCase):
+    
     def setUp(self):
         self.endereco = mommy.make('EnderecoAluno')
+    
     
    
 class AlunoTestCase(TestCase):
