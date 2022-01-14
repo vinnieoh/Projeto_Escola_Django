@@ -3,6 +3,7 @@ from django.db.models.fields import DateField
 
 
 class EnderecoAluno(models.Model):
+    idEnderecoAluno = models.AutoField(primary_key=True),
     rua = models.CharField(max_length=200, null=False, blank=False)
     bairro = models.CharField(max_length=200, null=False, blank=False)
     cidade = models.CharField(max_length=50, null=False, blank=False)
@@ -18,6 +19,7 @@ class EnderecoAluno(models.Model):
 
 
 class Aluno(models.Model):
+    idAluno = models.AutoField(primary_key=True),
     frist_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     cpf = models.CharField(max_length=11, unique=True, null=False, blank=False)
@@ -43,6 +45,7 @@ class Aluno(models.Model):
 
 
 class TelefoneAluno(models.Model):
+    idTelefoneAluno = models.AutoField(primary_key=True),
     aluno = models.ForeignKey("Aluno", on_delete=models.CASCADE, related_name='contato')
     ddd = models.CharField(max_length=2)
     numero = models.CharField(max_length=9)
@@ -59,6 +62,7 @@ class TelefoneAluno(models.Model):
 
 
 class MatriculaAluno(models.Model):
+    idMatriculaAluno = models.AutoField(primary_key=True),
     matricula = models.CharField(max_length=100, unique=True, null=False, blank=False)
     data_matricula = models.DateTimeField(auto_now_add=True)
     aluno = models.OneToOneField(Aluno, on_delete=models.SET_NULL, null=True)
@@ -68,6 +72,7 @@ class MatriculaAluno(models.Model):
 
     
 class Boletim(models.Model):
+    idBoletim = models.AutoField(primary_key=True),
     nome_boletim = models.CharField(max_length=100)
     nome_turma = models.CharField(max_length=50)
     Matricula_aluno = models.ForeignKey("MatriculaAluno", on_delete=models.CASCADE, related_name='boletim')
@@ -78,6 +83,7 @@ class Boletim(models.Model):
 
 
 class Nota(models.Model):
+    idNota = models.AutoField(primary_key=True),
     nome_materia = models.CharField(max_length=20, null=False, blank=False)
     nome_professor = models.CharField(max_length=100, null=False, blank=False)
 
