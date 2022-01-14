@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+
+  pgescola:
+    build: 
+      dockerfile: ./docker/pgescola.dockerfile
+      context: .
+    image: vinnioh/pgescola_django:v1
+    container_name: pgescola
+    ports: 
+      - "5432"
+    networks: 
+      - nwescola
+    volumes: 
+      - pgdata:/var/lib/postgresql/data/
+
+  escola:
+    build: 
+      dockerfile: ./docker/escola.dockerfile
+      context: .
+    image: vinnioh/escola_crud:v1
+    container_name: escola
+    ports:
+      - "8080"
+    networks:
+      - "nwescola"
+    depends_on:
+      - "pgescola"
+
+networks: 
+  nwescola:
+    driver: bridge
+
+volumes: 
+  pgdata:
