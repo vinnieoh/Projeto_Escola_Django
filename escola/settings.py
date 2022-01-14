@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'alunos',
+    
+    'bootstrap4',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -80,7 +82,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'escola',
-        'USER': 'postgres',
+        'USER': 'vinicius',
         'PASSWORD': 'root12345',
         'HOST': '127.0.0.1',
         'PORT': '5432',
