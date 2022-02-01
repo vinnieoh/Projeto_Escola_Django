@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.fields import DateField
+from django.contrib.auth.hashers import make_password
 
 
 class EnderecoAluno(models.Model):
@@ -15,7 +16,7 @@ class EnderecoAluno(models.Model):
         verbose_name_plural = 'Endereços Alunos'
 
     def __str__(self) :
-        return f'Rua: {self.rua}'
+        return f'Rua: {self.rua} | Bairro: {self.bairro} | Cidade: {self.cidade}'
 
 
 class Aluno(models.Model):
@@ -25,8 +26,8 @@ class Aluno(models.Model):
     cpf = models.CharField(max_length=11, unique=True, null=False, blank=False)
     nascimento = DateField(null=False, blank=False)
     email = models.EmailField(max_length=250, unique=True, null=False, blank=False)
-    password = models.CharField(max_length=100)
-
+    password = models.CharField(max_length = 254, db_column = 'password')
+        
     sexo_choice = (
         ("F", "Feminino"),
         ("M", "Masculino"),

@@ -1,18 +1,20 @@
 from django.test import TestCase
-from model_mommy import mommy
+from model_bakery import baker
 
+from alunos.models import EnderecoAluno
 
 class EnderecoAlunoTestCase(TestCase):
     
     def setUp(self):
-        self.endereco = mommy.make('EnderecoAluno')
+       self.endereco = baker.make('EnderecoAluno')
+
     
     
    
 class AlunoTestCase(TestCase):
     
     def setUp(self):
-        self.aluno = mommy.make('Aluno')
+        ...
 
     
 class TelefoneAlunoTestCase(TestCase):
