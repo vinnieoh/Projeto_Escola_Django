@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.fields import DateField
-from django.contrib.auth.hashers import make_password
 
 
 class EnderecoAluno(models.Model):
@@ -26,7 +25,7 @@ class Aluno(models.Model):
     cpf = models.CharField(max_length=11, unique=True, null=False, blank=False)
     nascimento = DateField(null=False, blank=False)
     email = models.EmailField(max_length=250, unique=True, null=False, blank=False)
-    password = models.CharField(max_length = 254, db_column = 'password')
+    _password = models.CharField(max_length = 254, db_column = 'password')
         
     sexo_choice = (
         ("F", "Feminino"),
@@ -69,22 +68,23 @@ class MatriculaAluno(models.Model):
     aluno = models.OneToOneField(Aluno, on_delete=models.SET_NULL, null=True)
 
     def __str__(self) -> str:
-        return f'{self.matricula}'
+        return self.matricula
 
-    
+
 class Boletim(models.Model):
     idBoletim = models.AutoField(primary_key=True),
     nome_boletim = models.CharField(max_length=100)
     nome_turma = models.CharField(max_length=50)
-    Matricula_aluno = models.ForeignKey("MatriculaAluno", on_delete=models.CASCADE, related_name='boletim')
+    Matricula_aluno = models.ForeignKey("MatriculaAluno", on_delete=models.CASCADE, related_name='boletim_matricula')
     aprovado = models.BooleanField(default=True)
 
     def __str__(self) -> str:
-        return f'{self.nome_boletim}'
+        return self.nome_boletim
 
 
 class Nota(models.Model):
     idNota = models.AutoField(primary_key=True),
+    Boletim_nota = models.ForeignKey("Boletim", on_delete=models.CASCADE, related_name='nota_boletim')
     nome_materia = models.CharField(max_length=20, null=False, blank=False)
     nome_professor = models.CharField(max_length=100, null=False, blank=False)
 
